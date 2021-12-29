@@ -5,6 +5,7 @@
 [![Build Status](https://github.com/platform-horizon/gconfig/workflows/build/badge.svg)](https://github.com/platform-horizon/gconfig/actions)
 [![Go Report Card](https://goreportcard.com/badge/github.com/platform-horizon/gconfig)](https://goreportcard.com/report/github.com/platform-horizon/gconfig)
 [![Go Reference](https://pkg.go.dev/badge/github.com/platform-horizon/gconfig.svg)](https://pkg.go.dev/github.com/platform-horizon/gconfig)
+[![Coverage](https://coveralls.io/repos/github/platform-horizon/gconfig/badge.svg?branch=main)](https://coveralls.io/github/platform-horizon/gconfig?branch=main)
 
 </div>
 
