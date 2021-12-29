@@ -10,7 +10,7 @@ import (
 )
 
 // GetConfigFromFile func read configuration from file and save in output interface.
-func GetConfigFromFile(configName string, configPath, output interface{}) error {
+func GetConfigFromFile(configName string, configPath string, output interface{}) error {
 	var k = koanf.New(".")
 
 	currentPath := fmt.Sprintf("%s/%s.json", configPath, configName)

@@ -1,27 +1,10 @@
 # Changelog
 
-## v1.1.0 - 2021-12-11
+All notable changes to this project will be documented in this file.
 
-### Changed
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-- Update go to 1.13 -> 1.17
-
-## v1.0.2 - 2021-12-11
-
-### Added
-
-- Koanf support for read configuration file
-
-## Changed
-
-- Removed Viper for handle configuration file
-- Updated github.com/spf13/viper 1.7.1 -> 1.8.0
-- Removed capitalized errors message
-
-## v1.0.1
-
-- Initial Release 🎉🎉🎉
-
-## v1.0.0 - 2021-01-05
+## v1.0.0
 
 - Initial Release 🎉🎉🎉

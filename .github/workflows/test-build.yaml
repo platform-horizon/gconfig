@@ -1,0 +1,49 @@
+name: build
+
+on:
+ push:
+    branches:
+      - main
+  
+jobs:
+  build:
+    name: Build and test on go ${{ matrix.go_version }}
+    runs-on: ubuntu-latest
+    strategy:
+       matrix:
+         go_version: [1.17]
+  
+    steps:
+      - name: Install Go ${{ matrix.go_version }}
+        uses: actions/setup-go@v2
+        with:
+          go-version: ^${{ matrix.go_version }}
+      
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Go Version
+        run: go version
+
+      - name: Go Dependencies
+        run: go get -v -t -d ./...
+
+      - name: Go Test
+        run: go test -race -covermode atomic -coverprofile=covprofile ./...
+
+      - name: Install goveralls
+        env:
+          GO111MODULE: off
+        run: go get github.com/mattn/goveralls
+
+      - name: Send coverage
+        env:
+          COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: goveralls -coverprofile=covprofile -service=github
+
+      - name: Build
+        if: matrix.go_version == ${{ matrix.go_version }}
+        run: go build -v ./...
+    

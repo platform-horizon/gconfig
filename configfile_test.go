@@ -21,12 +21,12 @@ func TestGetConfigurationFile(t *testing.T) {
 
 		err := GetConfigFromFile(configName, configPath, &config)
 
-		assert.Equal(t, err, nil, "Error is nil")
-		assert.Equal(t, config.LogLevel, "info")
-		assert.Equal(t, config.HTTPPort, "3000")
+		assert.Equal(t, err, nil, "Unexpected error is not nil")
+		assert.Equal(t, config.LogLevel, "info", "Unexpected log level value")
+		assert.Equal(t, config.HTTPPort, "3000", "Unexpected http port value")
 	})
 
-	t.Run("Throw if config file not found at selected path", func(t *testing.T) {
+	t.Run("Return error if config file not found at selected path", func(t *testing.T) {
 		wrongPath := "/etc/app"
 		fileName := "configuration"
 		var config ConfigurationFileVariables
@@ -35,10 +35,10 @@ func TestGetConfigurationFile(t *testing.T) {
 		_, ok := err.(viper.ConfigFileNotFoundError)
 
 		assert.Assert(t, !ok)
-		assert.Assert(t, err != nil, "Error is nil")
+		assert.Assert(t, err != nil, "Unexpected error is not nil")
 	})
 
-	t.Run("Throw if config file not found with selected name", func(t *testing.T) {
+	t.Run("Returns if config file not found with selected name", func(t *testing.T) {
 		path := "."
 		wrongFileName := "wrongFileName"
 		var config ConfigurationFileVariables
@@ -46,11 +46,11 @@ func TestGetConfigurationFile(t *testing.T) {
 		err := GetConfigFromFile(path, wrongFileName, &config)
 		_, ok := err.(viper.ConfigFileNotFoundError)
 
-		assert.Assert(t, err != nil, "Error is not nil")
+		assert.Assert(t, err != nil, "Unexpected error is nil")
 		assert.Assert(t, !ok, "")
 	})
 
-	t.Run("Throw if output struct does not contain config variabile", func(t *testing.T) {
+	t.Run("Returns if output struct does not contain config variabile", func(t *testing.T) {
 		type ConfigEnvVars struct{}
 
 		path := "."
@@ -60,7 +60,7 @@ func TestGetConfigurationFile(t *testing.T) {
 
 		err := GetConfigFromFile(path, fileName, &wrongConfig)
 
-		assert.Assert(t, err != nil, "Error is not nil")
-		assert.Equal(t, wrongConfig, ConfigEnvVars{}, "Config is not empyt")
+		assert.Assert(t, err != nil, "Unexpected error is nil")
+		assert.Equal(t, wrongConfig, ConfigEnvVars{}, "Unexpected not empty config")
 	})
 }
